@@ -40,4 +40,4 @@ jobs:
           uses: actions/upload-artifact@v2
           with:
             name: test-results
-            path: build/test_results.xml
+            path: test_results.xml
