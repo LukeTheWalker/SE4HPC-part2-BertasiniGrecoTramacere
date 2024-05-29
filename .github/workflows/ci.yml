@@ -1,0 +1,43 @@
+name: build and test matrix multiplication
+
+on:
+    push:
+        branches:
+        - main
+    pull_request:
+        branches:
+        - main
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+
+        steps:
+        - name: checkout repository
+          uses: actions/checkout@v3
+          with:
+            submodules: recursive
+
+        - name: set up environment
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y build-essential cmake
+
+        - name: build project
+          run: |
+            mkdir build
+            cd build
+            cmake ..
+            cmake --build .
+
+        - name: run tests
+          run: |
+            cd build
+            ctest --output-on-failure --output-log test_results.xml
+
+        - name: upload test results
+          if: failure()
+          uses: actions/upload-artifact@v2
+          with:
+            name: test-results
+            path: build/test_results.xml
