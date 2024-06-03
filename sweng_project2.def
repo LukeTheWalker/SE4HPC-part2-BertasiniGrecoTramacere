@@ -3,10 +3,19 @@ From ubuntu:latest
 
 %post
     apt-get update && apt-get install -y build-essential cmake mpich
+    apt-get update
+    apt-get install -y gcc openmpi-bin libopenmpi-dev
 
 %files
-    /home/trama/SWENG/SE4HPC-part1-BertasiniGrecoTramacere/build/test_multiplication: /usr/local/bin/test_multiplication
+    . /project
+
 
 %environment
     export PATH=$PATH:/usr/local/bin
-
+    export OMPI_CC=gcc
+    export OMPI_CXX=g++
+    
+%runscript
+    cd /project
+    ./build.sh
+    mpirun -np 2 ./build/main

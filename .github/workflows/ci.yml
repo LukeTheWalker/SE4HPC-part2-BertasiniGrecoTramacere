@@ -41,3 +41,18 @@ jobs:
           with:
             name: test-results
             path: build/test_results.xml
+        
+        - name: Build Singularity Image
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y singularity-container
+            sudo singularity build matrix_multiplication.sif sweng_project2.def
+            
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: matrix_multiplication
+            path: matrix_multiplication.sif
+
+        name: CI
+
