@@ -48,6 +48,16 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+        - name: checkout repository
+          uses: actions/checkout@v4
+          with:
+            submodules: recursive
+
+        - name: set up environment
+          run: |
+            sudo apt-get update
+            sudo apt-get install -y build-essential cmake mpich libmpich-dev
+
         - name: install Singularity         
           uses: eWaterCycle/setup-singularity@v7
           with:
