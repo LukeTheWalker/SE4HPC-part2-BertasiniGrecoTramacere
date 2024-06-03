@@ -17,4 +17,4 @@ export HWLOC_COMPONENTS=-gl
 export OMPI_MCA_btl=^openib
 
 # run the singularity container and map the current directory to /project
-srun singularity run --bind /scratch_local:$TMPDIR matrix_multiplication.sif /project/main
+mpirun -n 2 singularity run --bind /scratch_local:$TMPDIR matrix_multiplication.sif /project/main > output.txt 2> error.txt
