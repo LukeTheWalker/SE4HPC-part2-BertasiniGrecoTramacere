@@ -7,5 +7,10 @@
 #SBATCH --time=00:10:00
 #SBATCH --partition=g100_all_serial
 
+module load singularity
+
+export TMPDIR=$HOME/tmp
+mkdir -p $TMPDIR
+
 # run the singularity container and map the current directory to /project
-singularity run matrix_multiplication.sif
+singularity run --bind /scratch_local:$TMPDIR matrix_multiplication.sif
