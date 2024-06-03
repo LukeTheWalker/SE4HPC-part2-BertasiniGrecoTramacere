@@ -1,12 +1,12 @@
 Bootstrap: docker
-From: debian:latest
+From: mfisherman/openmpi
 
 %files
   . /project
 
 %post
   apt update
-  apt install -y build-essential cmake gcc openmpi-bin libopenmpi-dev
+  apt install -y build-essential cmake gcc 
   
   cd /project
   mkdir -p build && cd build
