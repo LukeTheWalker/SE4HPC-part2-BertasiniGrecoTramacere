@@ -9,6 +9,12 @@ From: ubuntu:latest
   export LD_LIBRARY_PATH=/opt/ompi/lib:$LD_LIBRARY_PATH
   export PATH=/opt/ompi/bin:$PATH
   export DEBIAN_FRONTEND=noninteractive
+  
+  export OMPI_DIR=/opt/ompi
+  export SINGULARITY_OMPI_DIR=$OMPI_DIR
+  export SINGULARITYENV_APPEND_PATH=$OMPI_DIR/bin
+  export SINGULAIRTYENV_APPEND_LD_LIBRARY_PATH=$OMPI_DIR/lib
+
 
 %post
   apt-get update
@@ -22,18 +28,20 @@ From: ubuntu:latest
   apt-get install -y g++
   apt-get install -y make
   apt-get install -y cmake
-  
-  export LD_LIBRARY_PATH=/usr/lib64/libibverbs:$LD_LIBRARY_PATH
-  
-  mkdir /tmp/openmpi && \
-  cd /tmp/openmpi && \
-  wget https://www.open-mpi.org/software/ompi/v4.0/downloads/openmpi-4.0.0.tar.gz && \
-  tar zxf openmpi-4.0.0.tar.gz && \
-  cd openmpi-4.0.0 && \
-  ./configure --prefix=/opt/ompi --with-verbs=/usr && \
-  make -j $(nproc) all && \
-  make install && \
-  rm -rf /tmp/openmpi
+
+  echo "Installing required packages..."
+  apt-get update && apt-get install -y wget git bash gcc gfortran g++ make file
+
+  echo "Installing Open MPI"
+  export OMPI_DIR=/opt/ompi
+  export OMPI_VERSION=4.0.1
+  export OMPI_URL="https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-$OMPI_VERSION.tar.bz2"
+  mkdir -p /tmp/ompi
+  mkdir -p /opt
+  # Download
+  cd /tmp/ompi && wget -O openmpi-$OMPI_VERSION.tar.bz2 $OMPI_URL && tar -xjf openmpi-$OMPI_VERSION.tar.bz2
+  # Compile and install
+  cd /tmp/ompi/openmpi-$OMPI_VERSION && ./configure --prefix=$OMPI_DIR && make install
   
   cd /project
   mkdir -p build && cd build
