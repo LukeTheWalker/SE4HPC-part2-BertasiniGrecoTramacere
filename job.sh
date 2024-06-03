@@ -7,7 +7,5 @@
 #SBATCH --time=00:10:00
 #SBATCH --partition=g100_all_serial
 
-module load singularity
-
 # run the singularity container and map the current directory to /project
 singularity run matrix_multiplication.sif

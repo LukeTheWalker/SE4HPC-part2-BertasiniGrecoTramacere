@@ -44,20 +44,20 @@ jobs:
             name: test-results
             path: build/test_results.xml
 
-        - name: install Singularity         
-          uses: eWaterCycle/setup-singularity@v7
-          with:
-            singularity-version: 3.8.0
+        # - name: install Singularity         
+        #   uses: eWaterCycle/setup-singularity@v7
+        #   with:
+        #     singularity-version: 3.8.0
             
-        - name: Build Singularity Image
-          run: |
-            singularity build --fakeroot matrix_multiplication.sif sweng_project2.def
+        # - name: Build Singularity Image
+        #   run: |
+        #     singularity build --fakeroot matrix_multiplication.sif sweng_project2.def
             
-        - name: Upload Artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: matrix_multiplication
-            path: matrix_multiplication.sif
+        # - name: Upload Artifact
+        #   uses: actions/upload-artifact@v4
+        #   with:
+        #     name: matrix_multiplication
+        #     path: matrix_multiplication.sif
         # install sshpass
         - name: Install sshpass
           run: |
@@ -66,13 +66,13 @@ jobs:
         - name: Upload Singularity Image
           run: |
             ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
-            sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no matrix_multiplication.sif ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:~/        
+            sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null matrix_multiplication.sif ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:~/        
             ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
-            sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no job.sh ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:~/
+            sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null job.sh ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:~/
         # using ssh run the job.sh script
         - name: Run Job
           run: |
             ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
-            sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'bash -s' < job.sh
+            sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'bash -s' < job.sh
         name: CI
 
