@@ -44,6 +44,7 @@ jobs:
             name: test-results
             path: build/test_results.xml
 
+    build-singularity:
         - name: install Singularity         
           uses: eWaterCycle/setup-singularity@v7
           with:
@@ -71,5 +72,4 @@ jobs:
         - name: Run Job
           run: |
             sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'bash -s' < job.sh
-        name: CI
 
