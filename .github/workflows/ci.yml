@@ -24,7 +24,6 @@ jobs:
           run: |
             sudo apt-get update
             sudo apt-get install -y build-essential cmake mpich libmpich-dev
-            sudo apt-get install -y singularity-container
 
         - name: build project
           run: |
@@ -46,14 +45,12 @@ jobs:
             path: build/test_results.xml
          
         - name: Set up Go 1.13
-          if: ${{ env.keepgoing == 'true' }}
           uses: actions/setup-go@v1
           with:
             go-version: 1.13
           id: go
 
         - name: Install Dependencies
-          if: ${{ env.keepgoing == 'true' }}
           run: |
             sudo apt-get update && sudo apt-get install -y \
               build-essential \
@@ -65,9 +62,8 @@ jobs:
               pkg-config
 
         - name: Install Singularity
-          if: ${{ env.keepgoing == 'true' }}
           env:
-            SINGULARITY_VERSION: 3.8.1
+            SINGULARITY_VERSION: 4.1.3
             GOPATH: /tmp/go
         
           run: |
