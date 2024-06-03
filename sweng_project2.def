@@ -1,21 +1,17 @@
 Bootstrap: docker
-From ubuntu:latest
-
-%post
-    apt-get update && apt-get install -y build-essential cmake mpich
-    apt-get update
-    apt-get install -y gcc openmpi-bin libopenmpi-dev
+From: ubuntu:latest
 
 %files
-    . /project
+  . /project
 
+%post
+  apt update
+  apt install -y cmake g++ make
 
-%environment
-    export PATH=$PATH:/usr/local/bin
-    export OMPI_CC=gcc
-    export OMPI_CXX=g++
-    
-%runscript
-    cd /project
-    ./build.sh
-    mpirun -np 2 ./build/main
+  apt install -y libopenmpi-dev
+
+  cd /project
+  mkdir -p build && cd build
+  cmake ..
+  cmake --build .
+  cp /project/build/main /project
