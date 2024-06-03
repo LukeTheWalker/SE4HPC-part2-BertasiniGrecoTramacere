@@ -43,13 +43,15 @@ jobs:
           with:
             name: test-results
             path: build/test_results.xml
-            
-        - name: Build Singularity Image
+
+        - name: install Singularity         
           uses: eWaterCycle/setup-singularity@v7
           with:
             singularity-version: 3.8.3
+            
+        - name: Build Singularity Image
           run: |
-            sudo singularity build matrix_multiplication.sif sweng_project2.def
+            singularity build matrix_multiplication.sif sweng_project2.def
             
         - name: Upload Artifact
           uses: actions/upload-artifact@v2
