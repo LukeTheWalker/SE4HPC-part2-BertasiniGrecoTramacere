@@ -51,7 +51,7 @@ jobs:
             
         - name: Build Singularity Image
           run: |
-            singularity build matrix_multiplication.sif sweng_project2.def
+            singularity build --fakeroot matrix_multiplication.sif sweng_project2.def
             
         - name: Upload Artifact
           uses: actions/upload-artifact@v2
