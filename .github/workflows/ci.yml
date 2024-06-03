@@ -54,7 +54,7 @@ jobs:
         - name: set up environment
           run: |
             sudo apt-get update
-            sudo apt-get install -y build-essential cmake mpich libmpich-dev
+            sudo apt-get install -y build-essential cmake libopenmpi-dev
 
         - name: install Singularity         
           uses: eWaterCycle/setup-singularity@v7
