@@ -28,6 +28,12 @@ int main(int argc, char** argv) {
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
 
+    if (rank == 0) {
+        std::cout << "Welcome to the Matrix Multiplication Application with number of MPI processes: " << size << std::endl;
+    }
+
+    std::cout << "Hi there! I am process " << rank << ". I am ready to multiply some matrices." << std::endl;
+
     if (size != 2) {
         if (rank == 0) {
             std::cerr << "This application is meant to be run with 2 MPI processes. Non esageriamo con le risorse. State molto calmi!" << std::endl;
