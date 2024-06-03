@@ -19,6 +19,7 @@ From: ubuntu:20.04
     mkdir -p build && cd build
     cmake ..
     cmake --build .
+    cp /project/build/main /project
     
 %runscript
-    mpirun -np 2 /project/build/main
+    mpirun -np 2 /project/main
