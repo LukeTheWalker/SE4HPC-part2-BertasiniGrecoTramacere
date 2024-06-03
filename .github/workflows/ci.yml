@@ -4,9 +4,11 @@ on:
     push:
         branches:
         - main
+        - Luca
     pull_request:
         branches:
         - main
+        - Luca
 
 jobs:
     build-and-test:
