@@ -45,6 +45,9 @@ jobs:
             path: build/test_results.xml
 
     build-singularity:
+        runs-on: ubuntu-latest
+
+        steps:
         - name: install Singularity         
           uses: eWaterCycle/setup-singularity@v7
           with:
