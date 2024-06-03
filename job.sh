@@ -2,8 +2,8 @@
 #SBATCH --job-name=mpi_singularity-job
 #SBATCH --output=mpi_singularity_output.txt
 #SBATCH --error=mpi_singularity_error.txt # Error file
-#SBATCH --ntasks=2
-#SBATCH --nodes=1
+#SBATCH --ntask-per-node=1
+#SBATCH --nodes=2
 #SBATCH --time=00:10:00
 #SBATCH --partition=g100_all_serial
 
