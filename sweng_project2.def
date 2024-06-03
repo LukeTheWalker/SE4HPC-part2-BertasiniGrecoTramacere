@@ -11,7 +11,6 @@ From: ubuntu:latest
   apt install -y libpmix-dev libpmix2
   apt install -y openmpi-bin libopenmpi-dev
 
-  
   cd /project
   mkdir -p build && cd build
   cmake ..

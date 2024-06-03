@@ -8,7 +8,6 @@
 #SBATCH --partition=g100_all_serial
 
 module load openmpi
-module load singularity
 
 export TMPDIR=$HOME/tmp
 mkdir -p $TMPDIR
