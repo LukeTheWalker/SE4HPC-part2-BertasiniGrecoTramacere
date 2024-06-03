@@ -7,8 +7,6 @@
 #SBATCH --time=00:10:00
 #SBATCH --partition=g100_all_serial
 
-module load singularity
-
 export TMPDIR=$HOME/tmp
 mkdir -p $TMPDIR
 

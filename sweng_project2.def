@@ -16,7 +16,9 @@ From: ubuntu:20.04
     apt-get update && apt-get install -y build-essential cmake mpich
     apt-get install -y gcc openmpi-bin libopenmpi-dev
     cd /project
-    ./build.sh
+    mkdir -p build && cd build
+    cmake ..
+    cmake --build .
     
 %runscript
     mpirun -np 2 ./build/main
