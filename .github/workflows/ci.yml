@@ -80,9 +80,8 @@ jobs:
         - name: Upload Singularity Image
           run: |
             sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null matrix_multiplication.sif job.sh matrixA.txt matrixB.txt ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:/g100/home/usertrain/a08trb46/
-# sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null job.sh ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:/g100/home/usertrain/a08trb46/
         # using ssh run the job.sh script
         - name: Run Job
           run: |
-            sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'bash -s' < job.sh
+            sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'sbatch' < job.sh
 
