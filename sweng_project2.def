@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:20.04
+From: centos:7
 
 %files
     . /project
@@ -34,8 +34,6 @@ From: ubuntu:20.04
     make install && \
     rm -rf /tmp/openmpi
     
-    apt-get update
-    apt-get install -y gcc openmpi-bin libopenmpi-dev
     cd /project
     mkdir -p build && cd build
     cmake ..
