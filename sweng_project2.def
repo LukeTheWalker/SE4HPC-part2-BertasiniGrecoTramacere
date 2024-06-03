@@ -14,7 +14,3 @@ From: ubuntu:20.04
     cmake ..
     cmake --build .
     cp /project/build/main /project
-    
-%runscript
-    export OMPI_MCA_btl=^openib
-    mpirun -n 2 /project/main
