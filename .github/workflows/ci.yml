@@ -44,20 +44,20 @@ jobs:
             name: test-results
             path: build/test_results.xml
 
-        # - name: install Singularity         
-        #   uses: eWaterCycle/setup-singularity@v7
-        #   with:
-        #     singularity-version: 3.8.0
+        - name: install Singularity         
+          uses: eWaterCycle/setup-singularity@v7
+          with:
+            singularity-version: 3.8.0
             
-        # - name: Build Singularity Image
-        #   run: |
-        #     singularity build --fakeroot matrix_multiplication.sif sweng_project2.def
+        - name: Build Singularity Image
+          run: |
+            singularity build --fakeroot matrix_multiplication.sif sweng_project2.def
             
-        # - name: Upload Artifact
-        #   uses: actions/upload-artifact@v4
-        #   with:
-        #     name: matrix_multiplication
-        #     path: matrix_multiplication.sif
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: matrix_multiplication
+            path: matrix_multiplication.sif
         # install sshpass
         - name: Install sshpass
           run: |
