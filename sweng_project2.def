@@ -8,8 +8,7 @@ From: ubuntu:latest
   apt update
   apt install -y cmake g++ make
 
-  apt install -y libpmix-dev libpmix2
-  apt install -y openmpi-bin libopenmpi-dev
+  apt install -y libopenmpi-dev
 
   cd /project
   mkdir -p build && cd build
