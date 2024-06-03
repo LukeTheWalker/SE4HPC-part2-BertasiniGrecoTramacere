@@ -22,6 +22,11 @@ jobs:
           run: |
             sudo apt-get update
             sudo apt-get install -y build-essential cmake mpich libmpich-dev
+            sudo apt-get install -y gpg-agent software-properties-common
+            sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E19D9B5B9C19E955
+            sudo add-apt-repository "deb [arch=amd64] http://repo.sylabs.io/sciniviz/ppa/ jammy main"
+            sudo apt-get update
+            sudo apt-get install -y singularity-container
 
         - name: build project
           run: |
