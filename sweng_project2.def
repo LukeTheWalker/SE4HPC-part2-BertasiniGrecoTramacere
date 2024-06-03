@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: centos:9
+From: centos:latest
 
 %files
     . /project
