@@ -6,7 +6,7 @@ From: mfisherman/openmpi
 
 %post
   apk update
-  apk install -y build-essential cmake gcc 
+  apk add cmake
   
   cd /project
   mkdir -p build && cd build
