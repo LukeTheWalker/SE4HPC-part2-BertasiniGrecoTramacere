@@ -65,14 +65,11 @@ jobs:
         # scp the singularity file into GUSER@SSH_GALIELO using SSH_PASS secret
         - name: Upload Singularity Image
           run: |
-            ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
             sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null matrix_multiplication.sif ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:~/        
-            ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
             sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null job.sh ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:~/
         # using ssh run the job.sh script
         - name: Run Job
           run: |
-            ssh-keygen -f "/home/runner/.ssh/known_hosts" -R "login.g100.cineca.it"
             sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'bash -s' < job.sh
         name: CI
 
