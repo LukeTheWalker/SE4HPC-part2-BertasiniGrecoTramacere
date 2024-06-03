@@ -21,7 +21,7 @@ From: centos:7
     yum install -y gcc
     yum install -y gcc-c++
     yum install -y make
-    yu install -y cmake
+    yum install -y cmake
 	
     export LD_LIBRARY_PATH=/usr/lib64/libibverbs:$LD_LIBRARY_PATH
 	
