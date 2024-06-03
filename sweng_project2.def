@@ -16,4 +16,5 @@ From: ubuntu:20.04
     cp /project/build/main /project
     
 %runscript
-    mpirun -np 2 /project/main
+    export OMPI_MCA_btl=^openib
+    mpirun -n 2 /project/main
