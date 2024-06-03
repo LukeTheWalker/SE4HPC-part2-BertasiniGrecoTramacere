@@ -21,4 +21,7 @@ From: ubuntu:20.04
     cmake --build .
     
 %runscript
+    ls 
+    ls /project
+    ls /project/build
     mpirun -np 2 project/build/main
