@@ -85,7 +85,6 @@ jobs:
         - name: Build Singularity Image
           run: |
             sudo apt-get update
-            sudo apt-get install -y singularity-container
             sudo singularity build matrix_multiplication.sif sweng_project2.def
             
         - name: Upload Artifact
