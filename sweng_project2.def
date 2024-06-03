@@ -1,12 +1,16 @@
 Bootstrap: docker
-From: mfisherman/openmpi
+From: ubuntu:latest
 
 %files
   . /project
 
 %post
-  apk update
-  apk add cmake
+  apt update
+  apt install -y cmake g++ make
+
+  apt install -y libpmix-dev libpmix2
+  apt install -y openmpi-bin libopenmpi-dev
+
   
   cd /project
   mkdir -p build && cd build
