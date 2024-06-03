@@ -28,6 +28,9 @@ From: ubuntu:latest
   apt-get install -y g++
   apt-get install -y make
   apt-get install -y cmake
+  sudo ln -s /usr/lib/apt/methods/gzip /usr/lib/apt/methods/bzip2
+  sudo apt-get install bzip2
+
 
   echo "Installing required packages..."
   apt-get update && apt-get install -y wget git bash gcc gfortran g++ make file
