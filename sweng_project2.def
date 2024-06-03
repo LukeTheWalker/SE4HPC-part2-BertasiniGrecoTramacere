@@ -5,8 +5,8 @@ From: mfisherman/openmpi
   . /project
 
 %post
-  apt update
-  apt install -y build-essential cmake gcc 
+  apk update
+  apk install -y build-essential cmake gcc 
   
   cd /project
   mkdir -p build && cd build
