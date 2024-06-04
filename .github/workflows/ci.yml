@@ -44,6 +44,7 @@ jobs:
             path: build/test_results.xml
 
     build-singularity:
+        needs: build-and-test
         runs-on: ubuntu-latest
 
         steps:

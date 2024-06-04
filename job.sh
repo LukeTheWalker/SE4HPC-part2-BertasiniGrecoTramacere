@@ -9,6 +9,9 @@
 
 module load openmpi
 
+export TMPDIR=$HOME/tmp
+mkdir -p $TMPDIR
+
 export HWLOC_COMPONENTS=-gl
 
 # run the singularity container and map the current directory to /project
