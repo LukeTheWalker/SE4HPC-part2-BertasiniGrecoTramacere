@@ -4,6 +4,7 @@ on:
     push:
         branches:
         - main
+        - prova
     pull_request:
         branches:
         - main
