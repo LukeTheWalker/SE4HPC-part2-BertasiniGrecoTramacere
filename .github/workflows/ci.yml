@@ -82,5 +82,19 @@ jobs:
         # using ssh run the job.sh script
         - name: Run Job
           run: |
-            sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'sbatch' < job.sh
+            sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'rm -rf mpi_singularity_error.txt mpi_singularity_output.txt'
+            sshpass -p ${{ secrets.SSH_PASS }} ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }} 'sbatch --wait' < job.sh
+        # scp the output files back to the runner
+        - name: Download Output
+          run: |
+            sshpass -p ${{ secrets.SSH_PASS }} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${{ vars.GUSER }}@${{ vars.SSH_GALILEO }}:/g100/home/usertrain/a08trb46/mpi_singularity_error.txt mpi_singularity_output.txt .
+            echo "Error file:"
+            cat mpi_singularity_error.txt
+            echo "Output file:"
+            cat mpi_singularity_output.txt
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: matrix_multiplication_output
+            path: mpi_singularity_error.txt mpi_singularity_output.txt
 
