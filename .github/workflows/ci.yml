@@ -93,9 +93,16 @@ jobs:
             cat mpi_singularity_error.txt
             echo "Output file:"
             cat mpi_singularity_output.txt
-        - name: Upload Artifact
+            
+        - name: Upload Output
           uses: actions/upload-artifact@v4
           with:
             name: matrix_multiplication_output
-            path: mpi_singularity_error.txt mpi_singularity_output.txt
+            path: mpi_singularity_output.txt
+
+        - name: Upload Error
+          uses: actions/upload-artifact@v4
+          with:
+            name: matrix_multiplication_error
+            path: mpi_singularity_error.txt
 
